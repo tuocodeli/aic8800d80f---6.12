@@ -1,0 +1,5 @@
+mkdir -p aic8800d80/DEBIAN
+mkdir -p aic8800d80/usr/src
+cp -r usr aic8800d80/
+cp control postinst postrm preinst prerm aic8800d80/DEBIAN/
+dpkg-deb --build --root-owner-group aic8800d80 aic8800d80fdrvpackage.deb
